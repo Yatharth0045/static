@@ -10,6 +10,13 @@ pipeline {
           '''
       }
     }
+    stage('Lint HTML') {
+      steps {
+          sh 'pwd'
+          sh 'ls'
+          sh 'tidy -q -e *.html'
+      }
+    }
     stage('Upload to s3') {
       steps{
         withAWS(credentials: 'aws', region: 'us-east-1') {
