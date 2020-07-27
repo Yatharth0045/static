@@ -10,5 +10,12 @@ pipeline {
           '''
       }
     }
+    stage('Upload to s3') {
+      steps{
+        withAWS(credentials: 'aws', region: 'us-east-1') {
+          s3Upload (pathStyleAccessEnabled:true, payloadSigningEnabled: true, file:'index.html', bucket:'udacity-project-jenkins')
+        }
+      }
+    }
   }
 }
